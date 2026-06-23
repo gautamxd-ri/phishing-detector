@@ -1,0 +1,35 @@
+<div class="checker-container">
+
+  <div class="input-row">
+    <input
+      type="text"
+      [(ngModel)]="url"
+      placeholder="Paste a URL to check e.g. https://suspicious-site.com"
+      class="input-field"
+      (keyup.enter)="analyze()"
+    />
+    <button
+      class="analyze-btn"
+      (click)="analyze()"
+      [disabled]="loading || !url.trim()">
+      {{ loading ? 'Analyzing...' : 'Analyze' }}
+    </button>
+    <button
+      class="clear-btn"
+      (click)="clear()"
+      [disabled]="loading">
+      Clear
+    </button>
+  </div>
+
+  <div *ngIf="loading" class="loading">
+    Analyzing URL with AI...
+  </div>
+
+  <div *ngIf="error" class="error">
+    {{ error }}
+  </div>
+
+  <app-result-card [result]="result"></app-result-card>
+
+</div>

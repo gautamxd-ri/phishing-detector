@@ -1,0 +1,42 @@
+<div class="checker-container">
+
+  <div class="input-area">
+    <textarea
+      [(ngModel)]="emailText"
+      placeholder="Paste the full email content here...
+
+Example:
+Dear Customer,
+Your account has been suspended. Click here to verify:
+http://paypal-verify.suspicious.com/login"
+      class="input-field"
+      rows="8">
+    </textarea>
+  </div>
+
+  <div class="btn-row">
+    <button
+      class="analyze-btn"
+      (click)="analyze()"
+      [disabled]="loading || !emailText.trim()">
+      {{ loading ? 'Analyzing...' : 'Analyze Email' }}
+    </button>
+    <button
+      class="clear-btn"
+      (click)="clear()"
+      [disabled]="loading">
+      Clear
+    </button>
+  </div>
+
+  <div *ngIf="loading" class="loading">
+    Analyzing email content with AI...
+  </div>
+
+  <div *ngIf="error" class="error">
+    {{ error }}
+  </div>
+
+  <app-result-card [result]="result"></app-result-card>
+
+</div>

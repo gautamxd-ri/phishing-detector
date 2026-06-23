@@ -1,0 +1,18 @@
+# Dependencies
+node_modules/
+*/node_modules/
+
+# Environment files
+.env
+*/.env
+backend/.env
+
+# ML service
+ml-service/venv/
+ml-service/__pycache__/
+
+# Angular build
+frontend/dist/
+
+# Logs
+*.log

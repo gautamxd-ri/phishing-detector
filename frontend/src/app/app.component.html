@@ -1,0 +1,24 @@
+<div class="app-container">
+
+  <header class="header">
+    <h1 class="app-title">🛡️ Phishing Detector</h1>
+    <p class="app-subtitle">AI-powered phishing detection for URLs, emails and SMS</p>
+  </header>
+
+  <nav class="tabs">
+    <a routerLink="/url" routerLinkActive="active" class="tab">
+      🔗 URL Checker
+    </a>
+    <a routerLink="/email" routerLinkActive="active" class="tab">
+      📧 Email Analyzer
+    </a>
+    <a routerLink="/sms" routerLinkActive="active" class="tab">
+      💬 SMS Scanner
+    </a>
+  </nav>
+
+  <main class="main-content">
+    <router-outlet></router-outlet>
+  </main>
+
+</div>

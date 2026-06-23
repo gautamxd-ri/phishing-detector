@@ -1,0 +1,59 @@
+<div *ngIf="result" class="result-card" [ngClass]="result.verdict">
+
+  <div class="verdict-header">
+    <span class="verdict-badge">{{ result.verdict | uppercase }}</span>
+    <span class="confidence">Confidence: {{ result.confidence }}</span>
+    <span class="source-badge">
+      {{ result.source === 'idb' ? 'From browser cache' :
+         result.source === 'mongodb' ? 'From server cache' :
+         result.source === 'mock' ? 'Mock model (no HF token)' :
+         'Hugging Face AI' }}
+    </span>
+  </div>
+
+  <p class="summary">{{ result.summary }}</p>
+
+  <ul class="reasons">
+    <li *ngFor="let reason of result.reasons">{{ reason }}</li>
+  </ul>
+
+  <div class="feedback-section" *ngIf="!feedbackGiven">
+    <p class="feedback-prompt">Was this prediction correct?</p>
+    <div class="feedback-buttons">
+      <button
+        class="feedback-btn up"
+        (click)="thumbsUp()"
+        [disabled]="feedbackLoading"
+        title="Prediction was correct">
+        👍 Correct
+      </button>
+      <button
+        class="feedback-btn down"
+        (click)="thumbsDown()"
+        [disabled]="feedbackLoading"
+        title="Prediction was wrong">
+        👎 Wrong
+      </button>
+    </div>
+
+    <div class="correction-picker" *ngIf="showCorrection">
+      <p class="correction-label">What should the correct verdict be?</p>
+      <div class="correction-options">
+        <button class="correction-btn safe" (click)="submitCorrection('safe')" [disabled]="feedbackLoading">Safe</button>
+        <button class="correction-btn suspicious" (click)="submitCorrection('suspicious')" [disabled]="feedbackLoading">Suspicious</button>
+        <button class="correction-btn dangerous" (click)="submitCorrection('dangerous')" [disabled]="feedbackLoading">Dangerous</button>
+        <button class="correction-btn cancel" (click)="cancelCorrection()" [disabled]="feedbackLoading">Cancel</button>
+      </div>
+    </div>
+
+    <p class="feedback-error" *ngIf="feedbackError">{{ feedbackError }}</p>
+  </div>
+
+  <div class="feedback-thanks" *ngIf="feedbackGiven">
+    <span *ngIf="result.feedback === 'up'">Thanks! You confirmed this prediction was correct.</span>
+    <span *ngIf="result.feedback === 'down'">
+      Thanks! You marked this as wrong — corrected to <strong>{{ result.correctedVerdict }}</strong>.
+    </span>
+  </div>
+
+</div>

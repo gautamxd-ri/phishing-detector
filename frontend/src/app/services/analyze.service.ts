@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
 import { IdbService } from './idb.service';
-import { environment } from '../environments/environment';
+import { environment } from '../../environments/environment';
 @Injectable({ providedIn: 'root' })
 export class AnalyzeService {
 

@@ -10,7 +10,12 @@ const app  = express();
 const PORT = process.env.PORT || 3000;
 
 // Middleware
-app.use(cors({ origin: 'http://localhost:4200' }));
+app.use(cors({
+  origin: [
+    'http://localhost:4200',
+    'https://phishing-detector-rho-gray.vercel.app'
+  ]
+}));
 app.use(express.json());
 
 // Routes

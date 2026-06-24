@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
 import { IdbService } from './idb.service';
-
+import { environment } from '../environments/environment';
 @Injectable({ providedIn: 'root' })
 export class AnalyzeService {
 
-  private API_BASE = 'http://localhost:3000/api';
+ private API_BASE = environment.apiUrl;
 
   constructor(
     private http: HttpClient,
